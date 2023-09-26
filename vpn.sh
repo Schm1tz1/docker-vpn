@@ -13,7 +13,7 @@ openvpn() {
     local authorizedKeys="${AUTHORIZED_KEYS}"
     
     local vpnConfig="$HOME/.vpn"
-    local dockerImage="ethack/vpn"
+    local dockerImage="schmitzi/vpn"
     
     # AUTHORIZED_KEYS not specified. Use some defaults.
     if [ -z "$authorizedKeys" ]; then
@@ -70,6 +70,7 @@ openvpn() {
 }
 
 openconnect() {
+    set -x
     local vpnName="$1"; shift
     if [ -z "$vpnName" ]; then
         echo "VPN name must be provided"
@@ -84,7 +85,7 @@ openconnect() {
     local vpnConfig="$HOME/.vpn"
     local vpnProfile="$vpnConfig/$vpnName.profile"
     local vpnSecret="$vpnConfig/$vpnName.secret"
-    local dockerImage="ethack/vpn"
+    local dockerImage="schmitzi/vpn"
     
     # AUTHORIZED_KEYS not specified. Use some defaults.
     if [ -z "$authorizedKeys" ]; then
@@ -118,6 +119,7 @@ openconnect() {
         source "${vpnProfile}"
         vpnCmd+=("${OC_HOST}")
         vpnCmd+=("--user" "${OC_USER}")
+        vpnCmd+=("--allow-insecure-crypto")
 
         if [ -f "${vpnSecret}" ]; then
             vpnCmd+=("--passwd-on-stdin")
@@ -126,6 +128,9 @@ openconnect() {
         fi
         if ! [ -z "{$OC_GROUP}" ]; then
             vpnCmd+=("--authgroup" "${OC_GROUP}")
+        fi
+        if ! [ -z "{$OC_SERVERCERT}" ]; then
+            vpnCmd+=("--servercert" "${OC_SERVERCERT}")
         fi
     fi
 
