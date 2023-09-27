@@ -12,6 +12,7 @@ openvpn() {
     local socksPort="${SOCKS_PORT:-1080}"
     local sshPort="${SSH_PORT:-2222}"
     local authorizedKeys="${AUTHORIZED_KEYS}"
+    local dockerExtraArgs="${DOCKER_EXTRA_ARGS}"
 
     local vpnConfig="$HOME/.vpn"
 
@@ -39,6 +40,8 @@ openvpn() {
     dockerCmd+=("--publish" "$bindIf:$sshPort:22")
     dockerCmd+=("--publish" "$bindIf:$socksPort:1080")
     dockerCmd+=("--env" "AUTHORIZED_KEYS=$authorizedKeys")
+    dockerCmd+=($dockerExtraArgs)
+
     if [ -f "$vpnConfig/$vpnName.ovpn" ]; then
         dockerCmd+=("--mount" "type=bind,src=$vpnConfig/$vpnName.ovpn,dst=/vpn/config,readonly=true")
         vpnCmd+=("--config" "/vpn/config")
@@ -80,6 +83,7 @@ openconnect() {
     local socksPort="${SOCKS_PORT:-1080}"
     local sshPort="${SSH_PORT:-2222}"
     local authorizedKeys="${AUTHORIZED_KEYS}"
+    local dockerExtraArgs="${DOCKER_EXTRA_ARGS}"
 
     local vpnConfig="$HOME/.vpn"
     local vpnProfile="$vpnConfig/$vpnName.profile"
@@ -109,6 +113,8 @@ openconnect() {
     dockerCmd+=("--publish" "$bindIf:$sshPort:22")
     dockerCmd+=("--publish" "$bindIf:$socksPort:1080")
     dockerCmd+=("--env" "AUTHORIZED_KEYS=$authorizedKeys")
+    dockerCmd+=($dockerExtraArgs)
+
     if [ -f "$vpnConfig/$vpnName.xml" ]; then
         dockerCmd+=("--mount" "type=bind,src=$vpnConfig/$vpnName.xml,dst=/vpn/config,readonly=true")
         vpnCmd+=("--xmlconfig" "/vpn/config")
