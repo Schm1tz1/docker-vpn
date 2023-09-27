@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 openvpn() {
     local vpnName="$1"; shift
