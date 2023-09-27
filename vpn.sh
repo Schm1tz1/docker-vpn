@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-local dockerImage="schmitzi/vpn"
+dockerImage="schmitzi/vpn"
 
 openvpn() {
     local vpnName="$1"; shift
@@ -12,9 +12,9 @@ openvpn() {
     local socksPort="${SOCKS_PORT:-1080}"
     local sshPort="${SSH_PORT:-2222}"
     local authorizedKeys="${AUTHORIZED_KEYS}"
-    
+
     local vpnConfig="$HOME/.vpn"
-    
+
     # AUTHORIZED_KEYS not specified. Use some defaults.
     if [ -z "$authorizedKeys" ]; then
         # add any key allowed to ssh in as the current user
@@ -80,11 +80,11 @@ openconnect() {
     local socksPort="${SOCKS_PORT:-1080}"
     local sshPort="${SSH_PORT:-2222}"
     local authorizedKeys="${AUTHORIZED_KEYS}"
-    
+
     local vpnConfig="$HOME/.vpn"
     local vpnProfile="$vpnConfig/$vpnName.profile"
     local vpnSecret="$vpnConfig/$vpnName.secret"
-    
+
     # AUTHORIZED_KEYS not specified. Use some defaults.
     if [ -z "$authorizedKeys" ]; then
         # add any key allowed to ssh in as the current user
