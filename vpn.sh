@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+local dockerImage="schmitzi/vpn"
 
 openvpn() {
     local vpnName="$1"; shift
@@ -13,7 +14,6 @@ openvpn() {
     local authorizedKeys="${AUTHORIZED_KEYS}"
     
     local vpnConfig="$HOME/.vpn"
-    local dockerImage="schmitzi/vpn"
     
     # AUTHORIZED_KEYS not specified. Use some defaults.
     if [ -z "$authorizedKeys" ]; then
@@ -84,7 +84,6 @@ openconnect() {
     local vpnConfig="$HOME/.vpn"
     local vpnProfile="$vpnConfig/$vpnName.profile"
     local vpnSecret="$vpnConfig/$vpnName.secret"
-    local dockerImage="schmitzi/vpn"
     
     # AUTHORIZED_KEYS not specified. Use some defaults.
     if [ -z "$authorizedKeys" ]; then
