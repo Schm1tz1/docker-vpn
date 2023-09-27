@@ -70,7 +70,6 @@ openvpn() {
 }
 
 openconnect() {
-    set -x
     local vpnName="$1"; shift
     if [ -z "$vpnName" ]; then
         echo "VPN name must be provided"
