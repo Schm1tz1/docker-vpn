@@ -6,8 +6,21 @@ RUN apk add --no-cache \
     && apk add --no-cache openvpn openssh \
     && apk add --no-cache py3-pip \
     && apk add --no-cache bind-tools curl \
-    && apk add --no-cache tmux kcat jq openssl \
+    && apk add --no-cache bash tmux kcat jq openssl vim vimdiff git \
     && pip --no-cache-dir install pproxy supervisor
+
+# Default Shell to bash
+RUN sed -i 's/\/ash/\/bash/g' /etc/passwd
+
+# Install oh my bash
+RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
+# Install Awesome VIM config
+RUN git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime \
+    && sh ~/.vim_runtime/install_awesome_vimrc.sh
+
+# Install Confluent CLI
+RUN curl -sL --http1.1 https://cnfl.io/cli | sh -s -- latest
 
 # Fix Cannot open "/proc/sys/net/ipv4/route/flush": Read-only file system
 # See https://serverfault.com/questions/878443/when-running-vpnc-in-docker-get-cannot-open-proc-sys-net-ipv4-route-flush 
