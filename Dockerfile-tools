@@ -6,7 +6,7 @@ RUN apk add --no-cache \
     && apk add --no-cache openvpn openssh \
     && apk add --no-cache py3-pip \
     && apk add --no-cache bind-tools curl \
-    && apk add --no-cache tmux kcat jq \
+    && apk add --no-cache tmux kcat jq openssl \
     && pip --no-cache-dir install pproxy supervisor
 
 # Fix Cannot open "/proc/sys/net/ipv4/route/flush": Read-only file system
