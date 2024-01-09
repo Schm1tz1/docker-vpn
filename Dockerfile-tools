@@ -6,7 +6,7 @@ RUN apk add --no-cache \
     && apk add --no-cache openvpn openssh \
     && apk add --no-cache py3-pip \
     && apk add --no-cache bind-tools curl \
-    && apk add --no-cache bash tmux kcat jq openssl vim vimdiff git terraform \
+    && apk add --no-cache bash openssl3 openjdk11 tmux kcat jq openssl vim vimdiff git terraform \
     && pip --no-cache-dir install pproxy supervisor
 
 # Default Shell to bash
