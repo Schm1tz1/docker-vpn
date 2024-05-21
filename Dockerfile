@@ -4,10 +4,10 @@ RUN apk add --no-cache \
     --repository https://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
     openconnect \
     && apk add --no-cache openvpn openssh \
-    && apk add --no-cache py3-pip \
     && apk add --no-cache bind-tools curl \
-    && pip --no-cache-dir install pproxy supervisor
-
+    && apk add --no-cache supervisor pipx \
+    && pipx install pproxy --system-site-packages
+    
 # Fix Cannot open "/proc/sys/net/ipv4/route/flush": Read-only file system
 # See https://serverfault.com/questions/878443/when-running-vpnc-in-docker-get-cannot-open-proc-sys-net-ipv4-route-flush 
 RUN rm -f /etc/vpnc/vpnc-script \    

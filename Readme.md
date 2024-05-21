@@ -88,3 +88,9 @@ docker-vpn provides all the power of an OpenSSH server. For example:
 ## Credits
 - https://github.com/Praqma/alpine-sshd
 - https://github.com/vimagick/dockerfiles/blob/master/openconnect/Dockerfile
+
+## Creating Docker Image with additional tools
+```shell
+docker build . -f Dockerfile-tools -t schmitzi/vpn:latest
+docker push schmitzi/vpn:latest
+```
