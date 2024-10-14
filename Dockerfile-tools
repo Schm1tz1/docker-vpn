@@ -5,7 +5,7 @@ RUN apk add --no-cache \
     openconnect \
     && apk add --no-cache openvpn openssh \
     && apk add --no-cache bind-tools curl \
-    && apk add --no-cache bash openssl3 openjdk11 tmux kcat jq openssl vim vimdiff git \
+    && apk add --no-cache bash openssl3 openjdk17 tmux kcat jq openssl vim vimdiff git \
     && apk add --no-cache supervisor pipx \
     && pipx install pproxy --system-site-packages
 
